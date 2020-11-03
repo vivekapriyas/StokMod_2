@@ -1,0 +1,20 @@
+The expected time between heavy infections 
+
+The expected time between two heavy infections is the same as the expected time to become heavily infected in general, since immediately after a heavy infection one has to be susceptible and the sojourn times are memoryless. 
+
+We define $v_i = E[min\{t \geq 0: X(t) = I_H | X(0) = i\}]$ for $i = I_S, I_L, I_H$. We solve the following system of equations
+$$v_{I_H} = 0$$
+$$V_{S} = E[S_S] + Pr\{S \rightarrow I_L\} v_{I_L} + Pr\{S \rightarrow I_H\} v_{I_H} $$
+$$V_{I_L} = E[S_{I_L}] + Pr\{I_L \rightarrow S\} v_S + Pr\{I_L \rightarrow I_H\} v_{I_H} $$
+
+
+$$ v_{S} = \frac{1}{\lambda} + (1-\alpha) v_{I_L} $
+$$ v_{I_L} =  \frac{1}{\mu_{I_L}}+  \frac{1}{\lambda} + (1-\alpha) v_{I_L} $$
+
+$$ v_{I_L} =  \frac{\frac{1}{\mu_{I_L}} +  \frac{1}{\lambda}}{\alpha} = 1070 \text{ days}$$
+$$ v_S =  \frac{1}{\lambda} + \frac{ (1-\alpha)(\frac{1}{\mu_{I_L}} +  \frac{1}{\lambda})}{\alpha} = 1063 \text{ days} $$. 
+
+
+
+
+
