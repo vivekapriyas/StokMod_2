@@ -3,10 +3,12 @@ The exponential distribution is memoryless, meaning that its distribution is the
 $$P(X(t+s)=j|X(s)=i, X(u), 0 \leq u \leq s)=P(X(t+s)=j|X(s)=j)$$ 
 for $i,j = 0,1,...$ and for all $s \geq 0$ and $t >0 $.
 
-The jump probabilities are $P(S \rightarrow I_L)= 1 - \alpha$, $P(S \rightarrow I_H)= \alpha$, $P(I_L \rightarrow S)= P(I_H \rightarrow S) = 1$ and $P(I_L \rightarrow I_H)= P(I_H \rightarrow I_L) = 0$. Using $\alpha = 0.10$, $P(S \rightarrow I_L)= 0.9$ and $P(S \rightarrow I_H)= 0.1$. 
+The jump probabilities are $P(S \rightarrow I_L)= 1 - \alpha$, $P(S \rightarrow I_H)= \alpha$, $P(I_L \rightarrow S)= P(I_H \rightarrow S) = 1$ and $P(I_L \rightarrow I_H)= P(I_H \rightarrow I_L) = 0$, since this is the probability to jump to a given state after the sojourn time ends.
 
-The transition rates are found from formula $q_{ij} = P(i \rightarrow j ) q_i$, where $q_i = \sum_{j \neq i} q_{ij}$. The rates are then expressed as $q_{SL} = (1-\alpha)\lambda $, $q_{SH} = \alpha \lambda$, $q_{LS} = 1/\mu_L$ and $q_{HS} = 1/\mu_H$. Using $\alpha = 0.10$ and inserting the values of $\lambda$, $\mu_L$ and $\mu_H$, the transition rates are 
-$$q_{SL} = 0.009,\text{ } q_{SH} = 0.001, \text{ } q_{LS} = 1/7, \text{ } q_{HS} = 1/20 \text{ and } q_{HL}=q_{LH}=0.$$
+Using $\alpha = 0.10$, $P(S \rightarrow I_L)= 0.9$ and $P(S \rightarrow I_H)= 0.1$. 
+
+The transition rates are found from formula $q_{ij} = P(i \rightarrow j ) q_i$, where $q_i = \sum_{j \neq i} q_{ij}$. The rates are then expressed as $q_{SI_L} = (1-\alpha)\lambda $, $q_{SI_H} = \alpha \lambda$, $q_{I_LS} = 1/\mu_L$ and $q_{I_HS} = 1/\mu_H$. Using $\alpha = 0.10$ and inserting the values of $\lambda$, $\mu_L$ and $\mu_H$, the transition rates are 
+$$q_{SI_L} = 0.009,\text{ } q_{SI_H} = 0.001, \text{ } q_{I_LS} = 1/7, \text{ } q_{I_HS} = 1/20 \text{ and } q_{I_HI_L}=q_{I_LI_H}=0.$$
 
 The transition diagram of $\{X(t):t \geq 0 \}$ is illustrated in figure \ref{transdiagramA}. 
 
