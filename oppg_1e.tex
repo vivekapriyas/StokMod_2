@@ -2,8 +2,8 @@ To calculate the expected time between two heavy infections is the same as calcu
 
 We define $v_i = E[\text{min}\{t \geq 0: X(t) = I_H | X(0) = i\}]$ for $i = I_S, I_L, I_H$. We solve the following system of equations
 $$v_{I_H} = 0$$
-$$V_{S} = E[S_S] + Pr\{S \rightarrow I_L\} v_{I_L} + Pr\{S \rightarrow I_H\} v_{I_H} $$
-$$V_{I_L} = E[S_{I_L}] + Pr\{I_L \rightarrow S\} v_S + Pr\{I_L \rightarrow I_H\} v_{I_H} $$
+$$V_{S} = E[S_S] + P(S \rightarrow I_L) v_{I_L}+ P(S \rightarrow I_) v_{I_H} $$
+$$V_{I_L} = E[S_{I_L}] + P(I_L \rightarrow S) v_S + P(I_L \rightarrow I_H) v_{I_H} $$
 
 
 $$ v_{S} = \frac{1}{\lambda} + (1-\alpha) v_{I_L} $$
