@@ -1,9 +1,7 @@
-$\{X(t):t \geq 0 \}$ is a continuous-time Markov chain since it satisfies the Markov property, i.e. 
+The exponential distribution is memoryless and its development in time will therefore not depend on its starting point. As the sojourn times are independet of each other and exponentially distributed, the sojourn time in a given state therefore will not depend on which states you have visited earlier. Thus $\{X(t):t \geq 0 \}$  satisfies the Markov property 
+
 $$P(X(t+s)=j|X(s)=i, X(u), 0 \leq u \leq s)=P(X(t+s)=j|X(s)=j)$$ 
-for $i,j = 0,1,...$ and for all $s \geq 0$ and $t >0 $. 
-
-This is satisfied due to the fact that the sojourn times $S_S$, $S_L$ and $S_H$ is  exponentially distributed and independent of each other, as given in the problem description.  
-
+for $i,j = 0,1,...$ and for all $s \geq 0$ and $t >0 $.
 
 The jump probabilities are $P(S \rightarrow I_L)= 1 - \alpha$, $P(S \rightarrow I_H)= \alpha$, $P(I_L \rightarrow S)= P(I_H \rightarrow S) = 1$ and $P(I_L \rightarrow I_H)= P(I_H \rightarrow I_L) = 0$. Using $\alpha = 0.10$, $P(S \rightarrow I_L)= 0.9$ and $P(S \rightarrow I_H)= 0.1$. 
 
@@ -18,7 +16,6 @@ The transition diagram of $\{X(t):t \geq 0 \}$ is illustrated in figure \ref{tra
     \caption{Transition diagram of $\{X(t):t\geq0\}$.}
     \label{transdiagramA}
 \end{figure}
-
 
 
 
