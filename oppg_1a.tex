@@ -7,8 +7,27 @@ The jump probabilities are $P(S \rightarrow I_L)= 1 - \alpha$, $P(S \rightarrow 
 
 Using $\alpha = 0.10$, $P(S \rightarrow I_L)= 0.9$ and $P(S \rightarrow I_H)= 0.1$. 
 
+FORSLAG:
+The jump proabilities are 
+$$P(S \rightarrow I_L)= 1 - \alpha = 0.9 \quad P(S \rightarrow I_H)= \alpha = 0.1$$ 
+and
+$$P(I_L \rightarrow S)= P(I_H \rightarrow S) = 1 \quad P(I_L \rightarrow I_H)= P(I_H \rightarrow I_L) = 0,$$ 
+since these are the proabilities to transition from one state to another after the sojourn time has ended.
+
 The transition rates are found from formula $q_{ij} = P(i \rightarrow j ) q_i$, where $q_i = \sum_{j \neq i} q_{ij}$. The rates are then expressed as $q_{SI_L} = (1-\alpha)\lambda $, $q_{SI_H} = \alpha \lambda$, $q_{I_LS} = 1/\mu_L$ and $q_{I_HS} = 1/\mu_H$. Using $\alpha = 0.10$ and inserting the values of $\lambda$, $\mu_L$ and $\mu_H$, the transition rates are 
 $$q_{SI_L} = 0.009,\text{ } q_{SI_H} = 0.001, \text{ } q_{I_LS} = 1/7, \text{ } q_{I_HS} = 1/20 \text{ and } q_{I_HI_L}=q_{I_LI_H}=0.$$
+
+FORSLAG: The transition rates can be found using the formula $q_{ij} = P(i \rightarrow j ) q_i$, where $q_i = \sum_{j \neq i} q_{ij}$, which results in
+
+$$q_{SI_L} = (1-\alpha)\lambda = 0.009 \quad q_{SI_H} = \alpha \lambda = 0.001 \quad q_{I_LS} = \frac{1}{\mu_L} = \frac17  \quad q_{I_HS} = \frac{1}{\mu_H} = 0.05 $$
+
+and
+$$ q_{I_HI_L}=q_{I_LI_H}=0 $$
+
+This is illustrated in the transition diagram in figure \ref{transdiagramA}.
+
+
+
 
 The transition diagram of $\{X(t):t \geq 0 \}$ is illustrated in figure \ref{transdiagramA}. 
 
