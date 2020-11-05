@@ -74,30 +74,29 @@ sd_grid_c <- (var_grid_c)^(1/2)
 
 
 plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,1))
-points(theta_grid, mu_grid_c)
+lines(theta_grid, mu_grid_c)
+lines(theta_grid, mu_grid_c + 1.64*sd_grid_c, col = "green", lwd = 2)
+lines(theta_grid, mu_grid_c - 1.64*sd_grid_c, col = "green", lwd = 2)
 
 
-#b) 
-#Y(theta) < 0.30
-q_grid = seq(from = 0, to = 1, by = 0.005)
 
+#b) ny
+t <- rep(c(0.3), times = 51)
 
-cdf_grid_c <- c()
+cdf_t <- c()
 
 for (i in 1:51){
-  Q_grid <- c(Q_grid, q_grid)
-  cdf_grid_c <- c(cdf_grid_c,pnorm(q = q_grid , mean = mu_grid_c[i], sd = sd_grid_c[i]))
-}
-
-
-len_q = length(q_grid)
-
-plot(NULL, NULL, xlim = c(0, 1), ylim = c(0,1))
-for (i in seq(from = 1, to = len_q*51, by  = len_q)){
+  cdf_t <- c(cdf_t, pnorm(t[i], mean = mu_grid_c[i], sd = sd_grid_c[i]))
   
-  lines(q_grid, cdf_grid_c[i:(i+len_q-1)], col = i)
 }
 
 
-Q_grid[max(which(cdf_grid_c < 0.3))]
+plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,0.3))
+#lines(theta_grid, cdf_t)
+points(theta_grid, cdf_t)
+
+print(theta_grid[which(cdf_t == max(cdf_t))])
+
+#c) 
+
 
