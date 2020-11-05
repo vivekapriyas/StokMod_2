@@ -80,13 +80,13 @@ lines(theta_grid, mu_grid_c - 1.64*sd_grid_c, col = "green", lwd = 2)
 
 
 
-#b) ny
-t <- rep(c(0.3), times = 51)
+#b)
 
+a <- 0.3
 cdf_t <- c()
 
 for (i in 1:51){
-  cdf_t <- c(cdf_t, pnorm(t[i], mean = mu_grid_c[i], sd = sd_grid_c[i]))
+  cdf_t <- c(cdf_t, pnorm(a, mean = mu_grid_c[i], sd = sd_grid_c[i]))
   
 }
 
@@ -98,5 +98,47 @@ points(theta_grid, cdf_t)
 print(theta_grid[which(cdf_t == max(cdf_t))])
 
 #c) 
+theta_eval2 <- c(theta_eval, 0.33)
+y_eval2 <- c(y_eval, 0.40)
+
+#mu and sigma for observed data points
+mu_eval2 <- sapply(theta_eval2,EY)
+sigma_eval2 <- sigma(theta_eval2)
+
+#sigma_AB, A = grid, B = eval
+sigma_AB2 <- cross_cov(theta_grid, theta_eval2)
+sigma_BA2 <- cross_cov(theta_eval2, theta_grid)
+
+#mu_grid_c: conditional mean vector of the process at the 51 grid points conditional on the 5 evaluation points
+mu_grid_c2 <- mu_c(mu_grid, sigma_AB2, sigma_eval2, y_eval2, mu_eval2)
+
+#sigma_grid_c: conditional covariance matrix of the process at the 51 grid points conditional on the 5 evaluation points
+sigma_grid_c2 <- sigma_c(sigma_grid, sigma_AB2, sigma_eval2, sigma_BA2)
+var_grid_c2 <- diag(sigma_grid_c2)+1e-10
+sd_grid_c2 <- (var_grid_c2)^(1/2)
+
+plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,1.2))
+lines(theta_grid, mu_grid_c2)
+lines(theta_grid, mu_grid_c2 + 1.64*sd_grid_c2, col = "green", lwd = 2)
+lines(theta_grid, mu_grid_c2 - 1.64*sd_grid_c2, col = "green", lwd = 2)
+points(theta_eval2, y_eval2, pch = 4, col = "red")
+
+
+a <- 0.3
+cdf_t2 <- c()
+
+for (i in 1:51){
+  cdf_t2 <- c(cdf_t2, pnorm(a, mean = mu_grid_c2[i], sd = sd_grid_c2[i]))
+  
+}
+
+
+plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,0.3))
+points(theta_grid, cdf_t2)
+
+
+print(theta_grid[which(cdf_t2 == max(cdf_t2))])
+
+
 
 
