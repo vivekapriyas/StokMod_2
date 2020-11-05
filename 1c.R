@@ -1,3 +1,4 @@
+#library(latex2exp)
 
 #(S,I_L,I_H) = (1,2,3)
 #parameters
@@ -65,6 +66,7 @@ while(s<P){
   X = c(X,i)
 }
 
+#c)
 Splot = S[S<=f]
 N = length(Splot)
 Xplot = X[1:N]
@@ -81,9 +83,7 @@ lines(c(Splot[N],f), Xplot[N]*c(1,1), lwd = 3)
 
 #d)
 
-print(timeS/P)
-print(timeI_L/P)
-print(timeI_H/P)
+print((timeI_L/P+timeI_H/P)*100)
 
 print((timeI_L/P+timeI_H/P)*365)
 
