@@ -2,7 +2,7 @@ To calculate the time between two heavy infections, we consider the time it take
 
 We define $T = \text{min}\{t \geq 0 : X(t)=I_H\}$ so that $v_i = E\left[T|X_0 = i \right]$ is the expected time until an individual becomes heavily infected, giving starting state $i$. We then want to solve the following set of equations 
 $$v_{I_H} = 0$$
-$$v_{S} = E[S_S] + P(S \rightarrow I_L) v_{I_L}+ P(S \rightarrow I_) v_{I_H} $$
+$$v_{S} = E[S_S] + P(S \rightarrow I_L) v_{I_L}+ P(S \rightarrow I_H) v_{I_H} $$
 $$v_{I_L} = E[S_{I_L}] + P(I_L \rightarrow S) v_S + P(I_L \rightarrow I_H) v_{I_H}. $$
 
 Here $v_{I_H} = 0$ because the starting state is the same as the desired state. By inserting the jump probabilities 
