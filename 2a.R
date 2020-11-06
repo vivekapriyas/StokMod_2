@@ -43,7 +43,7 @@ mu_c <- function(mu_A, sigma_AB, sigma_BB, x_B, mu_B){
 sigma_c <- function(sigma_AA, sigma_AB, sigma_BB, sigma_BA){
   return(sigma_AA - sigma_AB%*%solve(sigma_BB)%*%sigma_BA)
 }
-  
+
 
 #function to create cross-covariance matrix
 cross_cov <- function(x_A, x_B){
@@ -59,7 +59,7 @@ cross_cov <- function(x_A, x_B){
   return(S)
 }
 
-  
+
 #sigma_AB, A = grid, B = eval
 sigma_AB <- cross_cov(theta_grid, theta_eval)
 sigma_BA <- cross_cov(theta_eval, theta_grid)
@@ -73,13 +73,16 @@ var_grid_c <- diag(sigma_grid_c)
 sd_grid_c <- (var_grid_c)^(1/2)
 
 
-plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,1), main = "Prediction of Y[theta] conditional on observation points", cex.main = 1.0, xlab = "theta", ylab = "Y[theta]")
-legend("top", lty = 1:1, bty = "n", cex = 0.8, legend = c("E[Y(theta)|theta_E]", "Prediction interval"), col = c("black","orange"))
-legend(x = 0.355, y = 0.95, pch = 4, bty = "n", cex = 0.8, legend = c("Evaluation points"), col = c("red"))
+
+plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,1.2), main = "Prediction of Y(??) conditional on 5 evauation points", cex.main = 1.5, cex.axis = 1.5, cex.lab = 1.5, xlab = "??", ylab = "Y(??)")
+legend("top", lty = 1:1, bty = "n", cex = 1, legend = c("E[Y(??)|??_E]", "Prediction interval"), col = c("black","#66CCFF"))
+legend(x = 0.3515, y = 1.115, pch = 4, bty = "n", cex = 1, legend = c("Evaluation points"), col = c("red"))
+polygon(c(theta_grid, rev(theta_grid)), c(mu_grid_c - 1.64*sd_grid_c, rev(mu_grid_c + 1.64*sd_grid_c)), col = "#CCFFFF", border = NA)
 lines(theta_grid, mu_grid_c)
-lines(theta_grid, mu_grid_c + 1.64*sd_grid_c, col = "orange", lwd = 2)
-lines(theta_grid, mu_grid_c - 1.64*sd_grid_c, col = "orange", lwd = 2, legend = "Prediction interval")
+lines(theta_grid, mu_grid_c + 1.64*sd_grid_c, col = "#66CCFF", lwd = 2)
+lines(theta_grid, mu_grid_c - 1.64*sd_grid_c, col = "#66CCFF", lwd = 2, legend = "Prediction interval")
 points(theta_eval, y_eval, pch = 4, col = "red", lwd = 3)
+
 
 
 
@@ -94,11 +97,9 @@ for (i in 1:51){
 }
 
 
-plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,0.3))
-#lines(theta_grid, cdf_t)
-points(theta_grid, cdf_t)
-
-print(theta_grid[which(cdf_t == max(cdf_t))])
+plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,0.3), xlab = "??", ylab = "Pr{Y(??)|??_E < 0.30}", main = "Probability of Y(??)<0.30 conditional on 5 evaluation points", cex.main = 1.5, cex.axis = 1.5, cex.lab = 1.5)
+lines(theta_grid, cdf_t, col = "#3333CC", lwd = 2)
+points(theta_grid, cdf_t, pch = 19, col = "#3333CC", lwd = 2)
 
 #c) 
 theta_eval2 <- c(theta_eval, 0.33)
@@ -115,24 +116,20 @@ sigma_BA2 <- cross_cov(theta_eval2, theta_grid)
 #mu_grid_c: conditional mean vector of the process at the 51 grid points conditional on the 5 evaluation points
 mu_grid_c2 <- mu_c(mu_grid, sigma_AB2, sigma_eval2, y_eval2, mu_eval2)
 
-#sigma_grid_c: conditional covariance matrix of the process at the 51 grid points conditional on the 5 evaluation points
+#sigma_grid_c: conditional covariance matrix of the process at the 51 grid points conditional on the 6 evaluation points
 sigma_grid_c2 <- sigma_c(sigma_grid, sigma_AB2, sigma_eval2, sigma_BA2)
 var_grid_c2 <- diag(sigma_grid_c2)+1e-10
 sd_grid_c2 <- (var_grid_c2)^(1/2)
 
-plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,1.2))
-lines(theta_grid, mu_grid_c2)
-lines(theta_grid, mu_grid_c2 + 1.64*sd_grid_c2, col = "green", lwd = 2)
-lines(theta_grid, mu_grid_c2 - 1.64*sd_grid_c2, col = "green", lwd = 2)
-points(theta_eval2, y_eval2, pch = 4, col = "red")
 
-plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,1.2), main = "Prediction of Y[theta] conditional on observation points", cex.main = 1.0, xlab = "theta", ylab = "Y[theta]")
-legend("top", lty = 1:1, bty = "n", cex = 0.8, legend = c("E[Y(theta)|theta_E]", "Prediction interval"), col = c("black","orange"))
-legend(x = 0.355, y = 1.15, pch = 4, bty = "n", cex = 0.8, legend = c("Evaluation points"), col = c("red"))
+plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,1.2), main = "Prediction of Y(??) conditional on 6 evauation points", cex.main = 1.5, cex.axis = 1.5, cex.lab = 1.5, xlab = "??", ylab = "Y(??)")
+legend("top", lty = 1:1, bty = "n", cex = 1, legend = c("E[Y(??)|??_E]", "Prediction interval"), col = c("black","#66CCFF"))
+legend(x = 0.3515, y = 1.115, pch = 4, bty = "n", cex = 1, legend = c("Evaluation points"), col = c("red"))
+polygon(c(theta_grid, rev(theta_grid)), c(mu_grid_c2 - 1.64*sd_grid_c2, rev(mu_grid_c2 + 1.64*sd_grid_c2)), col = "#CCFFFF", border = NA)
 lines(theta_grid, mu_grid_c2)
-lines(theta_grid, mu_grid_c2 + 1.64*sd_grid_c2, col = "orange", lwd = 2)
-lines(theta_grid, mu_grid_c2 - 1.64*sd_grid_c2, col = "orange", lwd = 2, legend = "Prediction interval")
-points(theta_eval, y_eval, pch = 4, col = "red", lwd = 3)
+lines(theta_grid, mu_grid_c2 + 1.64*sd_grid_c2, col = "#66CCFF", lwd = 2)
+lines(theta_grid, mu_grid_c2 - 1.64*sd_grid_c2, col = "#66CCFF", lwd = 2, legend = "Prediction interval")
+points(theta_eval2, y_eval2, pch = 4, col = "red", lwd = 3)
 
 
 
@@ -145,8 +142,9 @@ for (i in 1:51){
 }
 
 
-plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,0.3))
-points(theta_grid, cdf_t2)
+plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,0.3), xlab = "??", ylab = "Pr{Y(??)|??_E < 0.30}", main = "Probability of Y(??)<0.30 conditional on 6 evaluation points", cex.main = 1.5, cex.axis = 1.5, cex.lab = 1.5)
+lines(theta_grid, cdf_t2, col = "#3333CC", lwd = 2)
+points(theta_grid, cdf_t2, pch = 19, col = "#3333CC", lwd = 2)
 
 
 print(theta_grid[which(cdf_t2 == max(cdf_t2))])
