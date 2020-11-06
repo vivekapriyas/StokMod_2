@@ -1,23 +1,12 @@
-%To calculate the expected time between two heavy infections is the same as calculating the expected time to become heavily infected in general starting in state susceptible. This since an individual immediately after a heavy infection  has to be susceptible and the sojourn times are exponential distributed / memoryless. 
-%We define $v_i = E[\text{min}\{t \geq 0: X(t) = I_H | X(0) = i\}]$ for $i = I_S, I_L, I_H$. We solve the following system of equations
-%$$v_{I_H} = 0$$
-%$$V_{S} = E[S_S] + P(S \rightarrow I_L) v_{I_L}+ P(S \rightarrow I_) v_{I_H} $$
-%$$V_{I_L} = E[S_{I_L}] + P(I_L \rightarrow S) v_S + P(I_L \rightarrow I_H) v_{I_H} $$
-%$$ v_{S} = \frac{1}{\lambda} + (1-\alpha) v_{I_L} $$
-%$$ v_{I_L} =  \frac{1}{\mu_{I_L}}+  \frac{1}{\lambda} + (1-\alpha) v_{I_L} $$
-%$$ v_{I_L} =  \frac{\frac{1}{\mu_{I_L}} +  \frac{1}{\lambda}}{\alpha} = 1070 \text{ days}$$
-%$$ v_S =  \frac{1}{\lambda} + \frac{ (1-\alpha)(\frac{1}{\mu_{I_L}} +  \frac{1}{\lambda})}{\alpha} = 1063 \text{ days} $$. 
-%The expected time between heavy infections is calculated to by $v_S = 1063 \text{ days} \approx 2.9 \text{ years.}$
-%FORSLAG:
 To calculate the time between two heavy infections, we consider the time it takes to become heavily infected, giving that the starting state is susceptible. This is equivalent since the jump probability from state $I_H$ to state $S$ is one and the sojourn times are exponentially distributed and therefore memoryless.
 
 We define $T = \text{min}\{t \geq 0 : X(t)=I_H\}$ so that $v_i = E\left[T|X_0 = i \right]$ is the expected time until an individual becomes heavily infected, giving starting state $i$. We then want to solve the following set of equations 
 $$v_{I_H} = 0$$
-$$V_{S} = E[S_S] + P(S \rightarrow I_L) v_{I_L}+ P(S \rightarrow I_) v_{I_H} $$
-$$V_{I_L} = E[S_{I_L}] + P(I_L \rightarrow S) v_S + P(I_L \rightarrow I_H) v_{I_H}. $$
+$$v_{S} = E[S_S] + P(S \rightarrow I_L) v_{I_L}+ P(S \rightarrow I_) v_{I_H} $$
+$$v_{I_L} = E[S_{I_L}] + P(I_L \rightarrow S) v_S + P(I_L \rightarrow I_H) v_{I_H}. $$
 
 Here $v_{I_H} = 0$ because the starting state is the same as the desired state. By inserting the jump probabilities 
 $$ v_{S} = \frac{1}{\lambda} + (1-\alpha) v_{I_L} $$
 $$ v_{I_L} =  \frac{1}{\mu_{I_L}}+  \frac{1}{\lambda} + (1-\alpha) v_{I_L}, $$
  we obtain that the expected time between heavy infections is
-$$\text{E}\left[T|X_0=S \right] = v_S = 1063 \text{days} \approx 2.9 \text{ years}.$$ 
+$$\text{E}\left[T|X_0=S \right] = v_S = 1063 \text{ days} \approx 2.9 \text{ years}.$$ 
