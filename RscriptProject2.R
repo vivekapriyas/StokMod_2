@@ -1,3 +1,100 @@
+#Problem 1 ---- 
+library(latexexp)
+#(S,I_L,I_H) = (1,2,3)
+#parameters
+lambda = 0.01
+mu_L = 1/7
+mu_H = 1/20
+alpha = 0.1
+
+ST = c(lambda,mu_L,mu_H)
+
+#time
+Yrs = 1000
+P = 365*Yrs
+f = 365*5 #time for plotting
+
+#starting conditions
+i = 1.0
+s = 0.0
+X = c(i)
+S = c(s)
+
+#long-run mean fractions of time
+timeS = 0.0
+timeI_L = 0.0
+timeI_H = 0.0
+
+I_H_times = c()
+lastI_H = 0.0
+
+while(s<P){
+  #finds sojourn time
+  this_sojourn_time =rexp(1,rate=ST[i])
+  
+  if (s + this_sojourn_time > P){
+    this_sojourn_time = P - s
+  }
+  
+  s = s + this_sojourn_time
+  
+  
+  S = c(S,s)
+  
+  #finds next state
+  p = runif(1)
+  if (i==1){
+    timeS = timeS + this_sojourn_time
+    if (p < alpha){
+      i = 3
+    }else {
+      i = 2
+    }
+  }else if (i == 2){
+    timeI_L = timeI_L + this_sojourn_time
+    i = 1
+  }else if (i == 3){
+    I_H_times = c(I_H_times, s-lastI_H)
+    
+    lastI_H = s
+    
+    timeI_H = timeI_H + this_sojourn_time
+    i = 1
+  }
+  
+  
+  X = c(X,i)
+}
+
+#c)
+Splot = S[S<=f]
+N = length(Splot)
+Xplot = X[1:N]
+
+
+
+plot(NULL, NULL, xlim = c(0,f), ylim = c(0, 4), lwd = 2, xlab = "Time [days]", ylab = "State", cex.axis = 1.5,
+     main = TeX("$X(t)$ for t $\\in \\[0, 1825\\]$"), axes = FALSE, frame.plot = TRUE)
+
+axis(2, at = c(0,1,2,3,4), labels = c("", "S", TeX("I_L"), TeX("I_H"), ""), las=0, cex.axis = 1.5)
+axis(1, xlim= c(0,f), cex.axis = 1.5)
+
+
+
+for(i in 1:N){
+  lines(Splot[i:(i+1)], Xplot[i]*c(1,1), lwd = 3)
+}
+lines(c(Splot[N],f), Xplot[N]*c(1,1), lwd = 3)
+
+
+
+#d)
+print((timeI_L/P+timeI_H/P)*365)
+
+#e)
+print(mean(I_H_times))
+
+#Problem 2 ----
 
 #observated theta and y
 theta_eval <- c(0.30,0.35,0.39,0.41,0.45)
@@ -43,7 +140,7 @@ mu_c <- function(mu_A, sigma_AB, sigma_BB, x_B, mu_B){
 sigma_c <- function(sigma_AA, sigma_AB, sigma_BB, sigma_BA){
   return(sigma_AA - sigma_AB%*%solve(sigma_BB)%*%sigma_BA)
 }
-  
+
 
 #function to create cross-covariance matrix
 cross_cov <- function(x_A, x_B){
@@ -59,7 +156,7 @@ cross_cov <- function(x_A, x_B){
   return(S)
 }
 
-  
+
 #sigma_AB, A = grid, B = eval
 sigma_AB <- cross_cov(theta_grid, theta_eval)
 sigma_BA <- cross_cov(theta_eval, theta_grid)
@@ -120,11 +217,6 @@ sigma_grid_c2 <- sigma_c(sigma_grid, sigma_AB2, sigma_eval2, sigma_BA2)
 var_grid_c2 <- diag(sigma_grid_c2)+1e-10
 sd_grid_c2 <- (var_grid_c2)^(1/2)
 
-plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,1.2))
-lines(theta_grid, mu_grid_c2)
-lines(theta_grid, mu_grid_c2 + 1.64*sd_grid_c2, col = "green", lwd = 2)
-lines(theta_grid, mu_grid_c2 - 1.64*sd_grid_c2, col = "green", lwd = 2)
-points(theta_eval2, y_eval2, pch = 4, col = "red")
 
 plot(NULL, NULL, xlim = c(0.25, 0.5), ylim = c(0,1.2), main = "Prediction of Y[theta] conditional on observation points", cex.main = 1.0, xlab = "theta", ylab = "Y[theta]")
 legend("top", lty = 1:1, bty = "n", cex = 0.8, legend = c("E[Y(theta)|theta_E]", "Prediction interval"), col = c("black","orange"))
@@ -150,7 +242,4 @@ points(theta_grid, cdf_t2)
 
 
 print(theta_grid[which(cdf_t2 == max(cdf_t2))])
-
-
-
 
