@@ -1,31 +1,13 @@
-We use Little's law and define $L$ as the hospitals capacity to handle individuals with complications from a cold, $\lambda_h$ as the mean number of individuals that requires hospitalization, and $W$ as the average treatment time required so that the average number of individuals does not exceed the capacity. 
+We use Little's law, where $L$ is the average number of individuals with complications from a cold in the hospital, $\lambda_h$ is the rate of arrival of individuals that requires hospitalization, and $W$ is the average treatment time. We wish to determine $W$ such that $L$ does not exceed the capacity of the hospital.
+To determine $W$, we first have to determine $\lambda_h$. Since all individuals are independent of each other, we can calculate the long-run mean fraction of time one individual is susceptible and multiply this with the population size to get the average number of individuals susceptible in a given day.
 
-To determine $\lambda_h$, one has to calculate the long-run fraction of time an individual is susceptible, the average number of susceptible individuals and the average number of individuals getting infected each day. By solving the following set of equations, 
-$$ \pi_S \lambda = \pi_I \mu$$ 
-$$ \pi_S + \pi_I = 1 $$
-the long-run fraction of time an individual is susceptible is determined to be $\pi_S = \frac{\mu}{\lambda + \mu} = \frac{100}{107} = 0.935.$
-%$$ \pi_I = \frac{\lambda}{\lambda+\mu} $$
-The average number of susceptible individuals is then 
+By solving the following set of equations,
+$$ \pi_S \lambda = \pi_I \mu$$
+$$ \pi_S + \pi_I = 1 ,$$ 
+the long-run mean fraction of time an individual is susceptible is determined to be $\pi_S = \frac{\mu}{\lambda + \mu} = \frac{100}{107} = 0.935.$
+The average number of susceptible individuals per day is then 
 $$ 5.26  \pi_S = 5.26 \cdot \frac{100}{107} = 4.9159 \text{ million individuals.}$$
-Using that the transition rate $ q_{SI} = \lambda = 0.01$, the average number of individuals getting infected is $49159$ individuals a day. This makes the arrivalrate of individuals that requires hospitalization $1\%$ of the average number of individuals getting infected that day, i.e. $\lambda_h = 491.6$ individuals. 
 
-The average treatment time required so that the average number of individuals in the hospital does not exceed the capacity is then determined to be $4.068$ days, using Little's law $W = \lambda_h/L$ with $L = 2000$ and $\lambda_h = 491.59$. 
+Using that the transition rate from susceptible to infected for one individual is $\lambda = 0.01$, the average number of individuals getting infected per day is $49159$, i.e. $\lambda_h = 491.6$ individuals. 
 
-
-
-%Forslag:
-%We use Little's law, where $L$ is the average number of individuals with complications from a cold in the hospital, $\lambda_h$ is the rate of arrival of individuals that requires hospitalization, and $W$ is the average treatment time. We wish to determine $W$ such that $L$ does not exceed the capacity of the hospital.
-%To determine $W$, we first have to determine $\lambda_h$. Since every individual is independent we can calculate the long-run fraction of time one individual is susceptible and multiply this we the number of individuals to get the average number of individuals susceptible in a given day.
-
-%By solving the following set of equations,
-%$$ \pi_S \lambda = \pi_I \mu$$
-%$$ \pi_S + \pi_I = 1 $$ 
-%the long-run fraction of time an individual is susceptible is determined to be $\pi_S = \frac{\mu}{\lambda + \mu} = \frac{100}{107} = 0.935.$
-%The average number of susceptible individuals is then 
-%$$ 5.26  \pi_S = 5.26 \cdot \frac{100}{107} = 4.9159 \text{ million individuals.}$$
-
-%Using that the transition rate $\lambda = 0.01$, the average number of individuals getting infected is $49159$ individuals a day. This makes the arrival rate of individuals that requires hospitalization $1\%$ of the average number of individuals getting infected that day, i.e. $\lambda_h = 491.6$ individuals. 
-
-%The average treatment time required so that the average number of individuals in the hospital does not exceed the capacity is then determined to be $4.068$ days, using Little's law $W = \lambda_h/L$ with $L = 2000$ and $\lambda_h = 491.59$. 
-
-
+Using Little's law, with $W = \lambda_h/L$ with $L = 2000$ and $\lambda_h = 491.59$, the maximal average required treatment time to ensure the average number of individuals in the hospital does not exceed its capacity is then determined to be $4.068$ days.
