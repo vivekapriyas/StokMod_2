@@ -1,4 +1,4 @@
-
+library(latexexp)
 #(S,I_L,I_H) = (1,2,3)
 #parameters
 lambda = 0.01
@@ -65,13 +65,21 @@ while(s<P){
   X = c(X,i)
 }
 
+#c)
 Splot = S[S<=f]
 N = length(Splot)
 Xplot = X[1:N]
 
 
-plot(NULL, NULL, xlim = c(0,f), ylim = c(0, 4), lwd = 2, cex.lab = 1.5, xlab = "Time", ylab = "State", cex.axis = 1.5,
-     main = "X(t)")
+
+plot(NULL, NULL, xlim = c(0,f), ylim = c(0, 4), lwd = 2, xlab = "Time [days]", ylab = "State", cex.axis = 1.5,
+     main = TeX("$X(t)$ for t $\\in \\[0, 1825\\]$"), axes = FALSE, frame.plot = TRUE)
+
+axis(2, at = c(0,1,2,3,4), labels = c("", "S", TeX("I_L"), TeX("I_H"), ""), las=0, cex.axis = 1.5)
+axis(1, xlim= c(0,f), cex.axis = 1.5)
+
+
+
 for(i in 1:N){
   lines(Splot[i:(i+1)], Xplot[i]*c(1,1), lwd = 3)
 }
@@ -80,15 +88,7 @@ lines(c(Splot[N],f), Xplot[N]*c(1,1), lwd = 3)
 
 
 #d)
-
-print(timeS/P)
-print(timeI_L/P)
-print(timeI_H/P)
-
 print((timeI_L/P+timeI_H/P)*365)
 
 #e)
-print(I_H_times)
 print(mean(I_H_times))
-print(sum(I_H_times))
-print(P)
